@@ -1,0 +1,66 @@
+{
+  "name": "babel-plugin-markdown",
+  "version": "0.0.0",
+  "description": "Precompile markdown to HTML at build time.",
+  "repository": {
+    "url": "egoist/babel-plugin-markdown",
+    "type": "git"
+  },
+  "main": "dist/index.common.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test:cov": "jest --coverage && npm run lint",
+    "test": "jest && npm run lint",
+    "lint": "xo",
+    "build": "bili --name index",
+    "prepublish": "npm run build"
+  },
+  "author": "egoist <0x142857@gmail.com>",
+  "license": "MIT",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  },
+  "dependencies": {
+    "markdown-it": "^8.3.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-jest": "^20.0.3",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "bili": "^0.16.0",
+    "eslint-config-rem": "^3.0.0",
+    "jest-cli": "^19.0.0",
+    "xo": "^0.18.0"
+  },
+  "xo": {
+    "extends": "rem/prettier",
+    "envs": [
+      "jest"
+    ],
+    "ignores": [
+      "**/__fixtures__/**"
+    ],
+    "rules": {
+      "new-cap": 0,
+      "no-template-curly-in-string": 0
+    }
+  }
+}
