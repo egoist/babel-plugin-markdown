@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-markdown",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Precompile markdown to HTML at build time.",
   "repository": {
     "url": "egoist/babel-plugin-markdown",
