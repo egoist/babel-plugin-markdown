@@ -27,9 +27,9 @@ export default function({ types: t }) {
                 md.use(importPlugin(plugin, file.opts.filename))
               }
             }
-          } else if (typeof opts.use === 'object') {
-            for (const plugin in opts.use) {
-              const pluginOptions = opts.use[plugin]
+          } else if (typeof opts.plugins === 'object') {
+            for (const plugin in opts.plugins) {
+              const pluginOptions = opts.plugins[plugin]
               md.use(plugin, pluginOptions)
             }
           }
