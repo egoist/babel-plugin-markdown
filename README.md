@@ -58,7 +58,7 @@ If you want to pass options to a markdown-it plugin, do:
 ```js
 {
   "plugins": [
-    ["pluginName", { anyOptions: true }]
+    ["pluginName", { "anyOptions": true }]
   ]
 }
 ```
