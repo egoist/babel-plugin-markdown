@@ -27,12 +27,20 @@ const html = markdown`
 
 **This is markdown**
 `
+
+// yield:
+
+const html = "<h1>hello</h1><p><strong>This is markdown</strong></p>"
 ```
 
-And you will get:
+### External files
 
 ```js
-const html = "<h1>hello</h1><p><strong>This is markdown</strong></p>"
+const html = markdown.require('./foo.md')
+
+// yield:
+
+const html = '<h1>foo</h1>'
 ```
 
 ### Use with options

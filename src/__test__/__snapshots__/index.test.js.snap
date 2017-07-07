@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`external 1`] = `"\\"<h1>hi</h1>\\\\n\\";"`;
+
 exports[`it only transforms markdown 1`] = `"const a = \\"<h1>hi</h1>\\\\n\\";const b = md\`# bye\`;"`;
 
 exports[`it works 1`] = `"\\"<h1>hi 2</h1>\\\\n\\";"`;

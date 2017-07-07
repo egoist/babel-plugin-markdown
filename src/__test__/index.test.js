@@ -30,6 +30,15 @@ test('markdown-it options', () => {
   })
 })
 
+test('external', () => {
+  compare({
+    input: 'markdown.require("./__fixtures__/external.md")',
+    babelOptions: {
+      filename: __filename
+    }
+  })
+})
+
 function compare({ input, pluginOptions, babelOptions }) {
   const { code } = babel.transform(input, {
     babelrc: false,
