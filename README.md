@@ -35,6 +35,34 @@ And you will get:
 const html = "<h1>hello</h1><p><strong>This is markdown</strong></p>"
 ```
 
+### Use with options
+
+```js
+{
+  "plugins": [
+    ["markdown", {
+      // All markdown-it options
+      "html": false,
+      // Plus "plugins":
+      "plugins": [
+        // It loads "markdown-it-task-lists"
+        "task-lists"
+      ]
+    }]
+  ]
+}
+```
+
+If you want to pass options to a markdown-it plugin, do:
+
+```js
+{
+  "plugins": [
+    ["pluginName", { anyOptions: true }]
+  ]
+}
+```
+
 ## Contributing
 
 1. Fork it!

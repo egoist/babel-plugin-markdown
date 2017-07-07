@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it only transforms markdown 1`] = `"const a = \\"<h1>hi</h1>\\\\n\\";const b = md\`# bye\`;"`;
+
+exports[`it works 1`] = `"\\"<h1>hi 2</h1>\\\\n\\";"`;
+
+exports[`markdown-it options 1`] = `"\\"<h1>hi</h1>\\\\n<pre><code class=\\\\\\"language-js\\\\\\">hahah</code></pre>\\\\n<ul class=\\\\\\"contains-task-list\\\\\\">\\\\n<li class=\\\\\\"task-list-item\\\\\\"><input class=\\\\\\"task-list-item-checkbox\\\\\\" disabled=\\\\\\"\\\\\\" type=\\\\\\"checkbox\\\\\\"> hi</li>\\\\n<li class=\\\\\\"task-list-item\\\\\\"><input class=\\\\\\"task-list-item-checkbox\\\\\\" checked=\\\\\\"\\\\\\" disabled=\\\\\\"\\\\\\" type=\\\\\\"checkbox\\\\\\"> there</li>\\\\n</ul>\\\\n\\";"`;

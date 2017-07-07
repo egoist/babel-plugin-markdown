@@ -5,38 +5,38 @@ import * as babel from 'babel-core'
 const plugin = require.resolve('../')
 test('it works', () => {
   compare({
-    input: 'markdown`# hi ${1+1}`',
-    output: '"<h1>hi 2</h1>\\n";'
+    input: 'markdown`# hi ${1+1}`'
   })
 })
 
 test('it only transforms markdown', () => {
   compare({
-    input: 'const a = markdown`# hi`; const b = md`# bye`',
-    output: 'const a = "<h1>hi</h1>\\n";const b = md`# bye`;'
+    input: 'const a = markdown`# hi`; const b = md`# bye`'
   })
 })
 
 test('markdown-it options', () => {
   compare({
     input: fixture('opts.js').trim(),
-    output: fixture('opts.output.js').trim(),
     pluginOptions: {
-      options: {
-        highlight() {
-          return 'hahah'
-        }
-      }
+      highlight() {
+        return 'hahah'
+      },
+      plugins: ['task-lists']
+    },
+    babelOptions: {
+      filename: __filename
     }
   })
 })
 
-function compare({ input, output, pluginOptions }) {
+function compare({ input, pluginOptions, babelOptions }) {
   const { code } = babel.transform(input, {
     babelrc: false,
-    plugins: [[plugin, pluginOptions]]
+    plugins: [[plugin, pluginOptions]],
+    ...babelOptions
   })
-  expect(code).toBe(output)
+  expect(code).toMatchSnapshot()
 }
 
 function fixture(...args) {

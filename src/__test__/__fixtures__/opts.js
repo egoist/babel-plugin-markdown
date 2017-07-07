@@ -4,4 +4,7 @@ markdown`
 \`\`\`js
 const foo = 'foo'
 \`\`\`
+
+- [ ] hi
+- [x] there
 `
