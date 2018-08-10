@@ -13,6 +13,12 @@ export default function({ types: t }) {
           path.replaceWith(toAST(string, t, state))
         }
       },
+      ExportNamedDeclaration(path, state) {
+        handleESM(path, state, t, 'isExport')
+      },
+      ImportDeclaration(path, state) {
+        handleESM(path, state, t, 'isImport')
+      },
       CallExpression(path, state) {
         const isMarkdownRequire = looksLike(path, {
           node: {
@@ -37,7 +43,28 @@ export default function({ types: t }) {
   }
 }
 
-function toAST(string, t, { opts, file }) {
+function handleESM(path, state, t, key) {
+  const { source, specifiers } = path.node
+
+  if (!source || !source.value || !specifiers || !specifiers.length) {
+    return
+  }
+
+  if (source.value.slice(-3) === '.md') {
+    const absolutePath = p.join(
+      p.dirname(state.file.opts.filename),
+      source.value
+    )
+    const string = fs.readFileSync(absolutePath, 'utf8')
+    path.replaceWith(toAST(string, t, {
+      ...state,
+      [key]: true,
+      id: key === 'isExport' ? specifiers[0].exported : specifiers[0].local,
+    }))
+  }
+}
+
+function toAST(string, t, { opts, file, isImport, isExport, id }) {
   const md = new Markdown({
     html: true,
     linkify: true,
@@ -62,7 +89,19 @@ function toAST(string, t, { opts, file }) {
   }
 
   const html = md.render(string)
-  return t.StringLiteral(html)
+  const literal = t.StringLiteral(html)
+
+  if (isImport) {
+    return t.variableDeclaration('const', [t.variableDeclarator(id, literal)])
+  }
+
+  if (isExport) {
+    return t.exportNamedDeclaration(t.variableDeclaration('const', [
+      t.variableDeclarator(id, literal)
+    ]), [], null)
+  }
+
+  return literal
 }
 
 function importPlugin(name, file) {
