@@ -35,8 +35,20 @@ const html = "<h1>hello</h1><p><strong>This is markdown</strong></p>"
 
 ### External files
 
+Using CommonJS:
+
 ```js
 const html = markdown.require('./foo.md')
+
+// yield:
+
+const html = '<h1>foo</h1>'
+```
+
+Using ESM:
+
+```js
+import html from './foo.md'
 
 // yield:
 
